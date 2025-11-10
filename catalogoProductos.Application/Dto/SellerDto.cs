@@ -4,12 +4,10 @@ public class SellerCreateDto
 {
     public string Name { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-    public string Career { get; set; } = string.Empty;
-    public DateTime? StartDate { get; set; }
-    public bool? Status { get; set; }
+    public string Store { get; set; } = string.Empty;
 }
 
 public class SellerUpdateDto
 {
-    public string? Specialization { get; set; }
+    public string Store { get; set; }
 }
