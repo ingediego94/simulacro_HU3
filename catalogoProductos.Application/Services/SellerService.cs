@@ -5,11 +5,11 @@ using catalogoProductos.Domain.Interfaces;
 
 namespace catalogoProductos.Application.Services;
 
-public class SellerServices : ISellerService
+public class SellerService : ISellerService
 {
     private readonly ISellerRepository _repository;
 
-    public SellerServices(ISellerRepository repository)
+    public SellerService(ISellerRepository repository)
     {
         _repository = repository;
     }

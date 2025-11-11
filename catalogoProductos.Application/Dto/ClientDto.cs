@@ -4,7 +4,6 @@ public class ClientCreateDto
 {
     public string Name { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-    public string Career { get; set; } = string.Empty;
     public bool? Premium { get; set; }
 }
 
