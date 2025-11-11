@@ -41,20 +41,20 @@ public class ClientService : IClientService
 
         if (client == null)
             return false;
-        //TODO:
-        if (dto.Career != null) 
-            student.Career = dto.Career;
         
-        if (dto.Status.HasValue) 
-            student.Status = dto.Status.Value;
-
+        if (dto.Premium != null) client.Premium = dto.Premium.Value;
+        
         await _repository.UpdateAsync(client);
         return true;
     }
 
     //Delete:
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var client = await _repository.GetByIdAsync(id);
+        if (client == null) return false;
+
+        await _repository.DeleteAsync(client.Id);
+        return true;
     }
 }
