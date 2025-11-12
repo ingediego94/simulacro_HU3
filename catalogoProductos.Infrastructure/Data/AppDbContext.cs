@@ -62,4 +62,7 @@ public class AppDbContext : DbContext
     public DbSet<Client> Clients { get; set; }
     public DbSet<Seller> Sellers { get; set; }
     public DbSet<Admin> Admins { get; set; }
+    
+    //Refresh Tokens
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 }
