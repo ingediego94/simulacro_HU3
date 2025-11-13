@@ -45,6 +45,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 // Login service
 builder.Services.AddScoped<LoginService>();
 
+// Refresh Token
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
 
 // JWT
