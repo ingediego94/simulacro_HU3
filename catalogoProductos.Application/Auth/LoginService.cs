@@ -38,7 +38,7 @@ public class LoginService
         var token = new JwtSecurityToken(
             issuer: _config["Jwt:Issuer"],
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(30),
+            expires: DateTime.UtcNow.AddMinutes(30),     // Duration of token (min)
             signingCredentials: creds
         );
 
@@ -67,7 +67,7 @@ public class LoginService
         {
             UserId = admin.Id,
             Token = refreshToken,
-            Expires = DateTime.UtcNow.AddDays(7) // duración del refresh token
+            Expires = DateTime.UtcNow.AddDays(7) // Duration of refresh token (days)
         };
 
         await _refreshRepo.AddAsync(refreshEntity);
@@ -105,4 +105,21 @@ public class LoginService
     //     
     //     return null;
     // }
+    
+    
+    // Logout
+    public async Task<bool> LogoutAsync(string refreshToken)
+    {
+        var storedToken = await _refreshRepo.GetByTokenAsync(refreshToken);
+
+        // Validar si el token existe o ya fue revocado
+        if (storedToken == null || storedToken.IsRevoked)
+            return false;
+
+        // Revocar el token
+        await _refreshRepo.RevokeAsync(storedToken);
+        await _refreshRepo.SaveChangesAsync();
+
+        return true;
+    }
 }

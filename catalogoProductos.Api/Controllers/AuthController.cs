@@ -94,7 +94,21 @@ public class AuthController : ControllerBase
         var result = await _registerPersonService.RegisterSellerAsync(request);
         return Ok(result);
     }
+    
+    
+    // Logout
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout([FromBody] LogoutRequest request)
+    {
+        var result = await _loginService.LogoutAsync(request.RefreshToken);
+
+        if (!result)
+            return NotFound("Invalid or already revoked refresh token.");
+
+        return Ok("Logout successful. Refresh token revoked.");
+    }
 }
 
 public record LoginRequest(string Email, string Password);
 public record RegisterAdminRequest(string Email, string Password);
+public record LogoutRequest(string RefreshToken);
